@@ -1,0 +1,37 @@
+{
+  "name": "postgres-index-benchmark",
+  "version": "1.0.0",
+  "description": "Reproducible PostgreSQL 18 index benchmark on 10 million rows: B-tree, hash, BRIN, GIN, partial, covering and multicolumn indexes, plus the write cost.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "up": "docker compose up -d --wait",
+    "down": "docker compose down -v",
+    "load": "node scripts/load.mjs",
+    "bench": "node scripts/bench.mjs",
+    "writes": "node scripts/writes.mjs",
+    "report": "node scripts/report.mjs",
+    "all": "npm run load && npm run bench && npm run writes && npm run report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LF3551/postgres-index-benchmark.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LF3551/postgres-index-benchmark/issues"
+  },
+  "keywords": [
+    "postgresql",
+    "postgres",
+    "index",
+    "btree",
+    "gin",
+    "brin",
+    "benchmark",
+    "performance"
+  ]
+}

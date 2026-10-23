@@ -1,0 +1,40 @@
+services:
+  db:
+    # Pinned: skip scan, "Index Searches" in EXPLAIN and parallel GIN builds need PostgreSQL 18.
+    image: postgres:18.6@sha256:edb0c08dc33befd0262ab3b5cf1c4f3f8cfd8b09e88c05b45adee29d6761ddb6
+    environment:
+      POSTGRES_PASSWORD: bench
+      POSTGRES_DB: bench
+    shm_size: 1gb # parallel index builds use shared memory
+    volumes:
+      - pgdata:/var/lib/postgresql
+    command:
+      - postgres
+      - -c
+      - shared_buffers=3GB
+      - -c
+      - effective_cache_size=8GB
+      - -c
+      - work_mem=64MB
+      - -c
+      - maintenance_work_mem=1GB
+      - -c
+      - max_parallel_maintenance_workers=4
+      - -c
+      - max_wal_size=16GB
+      - -c
+      - checkpoint_timeout=30min
+      - -c
+      - random_page_cost=1.1
+      - -c
+      - jit=off
+      - -c
+      - autovacuum=off # keeps the visibility map and statistics under the script's control
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bench"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata:

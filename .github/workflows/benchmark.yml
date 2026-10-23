@@ -1,0 +1,26 @@
+name: benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      rows:
+        description: Rows in the events table (the article uses 10000000)
+        default: "1000000"
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      ROWS: ${{ inputs.rows }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run up
+      - run: npm run all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: results/
