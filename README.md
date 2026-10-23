@@ -29,6 +29,7 @@ generated with a fixed seed, so every run produces the same data.
 | F | Arrays and `jsonb` containment, parallel GIN build | none, GIN, `jsonb_path_ops` |
 | P | Pitfalls: function on the column, low selectivity | B-tree, expression index |
 | G | Write cost: insert 1M rows with 0, 1, 3 and 5 secondary indexes | B-tree and GIN |
+| H | Primary key type: insert 5M rows | random UUIDv4 vs time-ordered UUIDv7 |
 
 Nothing is precomputed or stored in this repository: you run it and get the numbers for your own machine.
 The published numbers and their analysis are in the article.
@@ -49,7 +50,7 @@ npm run all      # load the data, run every experiment, measure the write cost, 
 npm run down     # removes the container and its data
 ```
 
-`npm run all` is the same as running `npm run load`, `npm run bench`, `npm run writes` and `npm run report` one after another.
+`npm run all` is the same as running `npm run load`, `npm run bench`, `npm run writes`, `npm run uuid` and `npm run report` one after another.
 The report is also saved as `results/report.md`.
 
 ### Use your own PostgreSQL
@@ -75,6 +76,7 @@ On PostgreSQL 17 or older the scripts still run, but skip scan and the `Index Se
 | `REPS` | `3` | Timed runs per measurement. One warm-up run is discarded, the median is reported. |
 | `ONLY` | all | Comma list of experiments for `npm run bench`, for example `ONLY=B,F`. |
 | `COPY_ROWS` | `1000000` | Rows inserted in the write-cost test (`npm run writes`). |
+| `UUID_ROWS` | `5000000` | Rows inserted in the primary-key test (`npm run uuid`). |
 
 Quick smoke test with a smaller table: `ROWS=1000000 npm run all`.
 

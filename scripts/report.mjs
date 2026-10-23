@@ -53,6 +53,16 @@ if (results.writes) {
     out();
 }
 
+if (results.uuid) {
+    const { variants, rows: n } = results.uuid;
+    out(`### H. Primary key type: inserting ${n.toLocaleString('en-US')} rows`);
+    out();
+    out('| Key | Insert time, s | Primary key size |');
+    out('|---|---:|---:|');
+    for (const v of variants) out(`| ${v.name} | ${(v.median_ms / 1000).toFixed(1)} | ${size(v.pk_bytes)} |`);
+    out();
+}
+
 const text = lines.join('\n');
 console.log(text);
 mkdirSync(path.join(ROOT, 'results'), { recursive: true });

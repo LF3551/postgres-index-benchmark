@@ -14,8 +14,9 @@
     "load": "node scripts/load.mjs",
     "bench": "node scripts/bench.mjs",
     "writes": "node scripts/writes.mjs",
+    "uuid": "node scripts/uuid.mjs",
     "report": "node scripts/report.mjs",
-    "all": "npm run load && npm run bench && npm run writes && npm run report"
+    "all": "npm run load && npm run bench && npm run writes && npm run uuid && npm run report"
   },
   "repository": {
     "type": "git",
