@@ -12,7 +12,7 @@ Full write-up with the decision table, the numbers and the explanations:
 - English: [PostgreSQL Indexes: Which Type to Use (10M-Row Benchmark)](https://www.alekseialeinikov.com/en/blog/topics/data/postgres-index-types-which-to-use-btree-gin-brin-benchmark)
 - Deutsch: [PostgreSQL-Indizes: Welcher Typ wann? (10-Mio-Zeilen-Benchmark)](https://www.alekseialeinikov.com/de/blog/topics/data/postgresql-indizes-welcher-typ-wann-benchmark)
 
-![PostgreSQL index types compared on 10 million rows: B-tree, hash, BRIN and GIN](assets/postgres-index-types.png)
+![PostgreSQL index types compared on 10 million rows: B-tree, hash, BRIN and GIN](assets/cover.png)
 
 ## What it measures
 
